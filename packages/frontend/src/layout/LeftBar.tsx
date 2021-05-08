@@ -1,5 +1,5 @@
 import Grid from "@material-ui/core/Grid";
-import React, { useContext } from "react";
+import React, { FunctionComponent, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Box } from "@material-ui/core";
 import { Link } from "react-router-dom";
@@ -11,7 +11,8 @@ const useStyles = makeStyles({
   },
 });
 
-const NavRow = ({ children }) => (
+
+const NavRow: FunctionComponent = ({ children }) => (
   <Grid item xs={12}>
     <Box height="40px" lineHeight="40px" paddingBottom="40px">
       {children}
@@ -19,11 +20,16 @@ const NavRow = ({ children }) => (
   </Grid>
 );
 
-const NavButton = ({ children }) => (
+const NavButton: FunctionComponent = ({ children }) => (
   <Button variant="contained">{children}</Button>
 );
 
-const NavItem = ({ children, to }) => {
+type NavItemProps = {
+    //! TEMP: revise to URL?
+    to: string;
+}
+
+const NavItem: FunctionComponent<NavItemProps> = ({ children, to }) => {
   const classes = useStyles();
   return (
     <NavRow>
