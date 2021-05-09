@@ -1,8 +1,8 @@
-import { useState, FunctionComponent, createContext, FormEvent } from "react";
-import { IFormProps, IFormConsumerChildren } from './context.interface';
+import { useState, FunctionComponent, createContext, useContext, FormEvent } from "react";
+import { IFormProps, IDefaultCxt } from './context.interface';
 
-const ValuesContext = createContext({});
-const ErrorsContext = createContext({});
+const ValuesContext = createContext<IDefaultCxt>({});
+const ErrorsContext = createContext<IDefaultCxt>({});
 const SetValueContext = createContext((name: string, value: string) => {});
 ValuesContext.displayName = "FormValues";
 ErrorsContext.displayName = "FormErrors";
@@ -65,18 +65,12 @@ const Form: FunctionComponent<IFormProps> = ({
 
 Form.displayName = "CustomForm";
 
-export const FormConsumer: FunctionComponent<IFormConsumerChildren> = ({ children }) => (
-    <ErrorsContext.Consumer>
-        {errors => (
-            <ValuesContext.Consumer>
-                {values => (
-                    <SetValueContext.Consumer>
-                        {setValue => children({ errors, values, setValue })}
-                    </SetValueContext.Consumer>
-                )}
-            </ValuesContext.Consumer>
-        )}
-    </ErrorsContext.Consumer>
-);
+export const useFormContext = () => {
+    return {
+        values: useContext(ValuesContext),
+        errors: useContext(ErrorsContext),
+        setValue: useContext(SetValueContext),
+    }
+}
 
 export default Form;
