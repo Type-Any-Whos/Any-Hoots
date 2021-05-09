@@ -5,6 +5,10 @@ type ErrOrValsObj = {
     [key: string]: string | number;
 }
 
+export interface IDefaultCxt extends ErrOrValsObj {
+
+}
+
 type FormConsumerChildSetValueFn = {
     (name: string, value: string): void;
 }
