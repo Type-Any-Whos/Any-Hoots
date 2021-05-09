@@ -1,5 +1,5 @@
-import React, { FunctionComponent, createContext, useContext, useState, FormEvent, ReactNode, ReactElement } from "react";
-import { StateContext, ContextType } from "../../../StateProvider";
+import { useState, FunctionComponent, createContext, FormEvent } from "react";
+import { IFormProps, IFormConsumerChildren } from './context.interface';
 
 const ValuesContext = createContext({});
 const ErrorsContext = createContext({});
@@ -12,21 +12,11 @@ const INITIAL_ERRORS_STATE = {};
 
 const defaultFormStateValues = {
     validator: () => INITIAL_ERRORS_STATE,
-    onSubmit: (evt: FormEvent) => null,
-    defaultValues: {
-        handle: "",
-        password: "",
-    }
+    onSubmit: () => null,
+    defaultValues: {},
 };
 
-type FormProps = {
-    validator?: () => {};
-    onSubmit({errors: {}, values: {}}): void;
-    defaultValues?: {};
-    children?: ReactNode;
-}
-
-const Form: FunctionComponent<FormProps> = ({
+const Form: FunctionComponent<IFormProps> = ({
     validator,      // removing validator prop from 'rest'
     onSubmit,       // removing validator prop from 'rest'
     defaultValues,  // removing validator prop from 'rest'
@@ -35,7 +25,6 @@ const Form: FunctionComponent<FormProps> = ({
 }) => {
     const [formValues, setFormValues] = useState(defaultFormStateValues.defaultValues);
     const [formErrors, setFormErrors] = useState(INITIAL_ERRORS_STATE);
-    const { state, dispatch } = useContext<ContextType>(StateContext);
 
     const _setValue = (name: string, value: string) => {
         setFormValues(prevState => ({
@@ -76,24 +65,7 @@ const Form: FunctionComponent<FormProps> = ({
 
 Form.displayName = "CustomForm";
 
-interface IErrors {
-    [key: string]: string | number;
-    [index: number]: string; // Can be a subset of string indexer
-}
-
-type IValues = {
-    [key: string]: string | number;
-    [index: number]: string; // Can be a subset of string indexer
-}
-
-type FormConsumerChildren = {
-    //! TODO - Refactor type declaration for maintainability
-    children(
-        { errors: {}, values: {}, setValue: {} }: {errors: IErrors, values: IValues, setValue: (name: string, value: string) => void}
-    ): ReactElement; // or ReactElement?
-};
-
-export const FormConsumer: FunctionComponent<FormConsumerChildren> = ({ children }) => (
+export const FormConsumer: FunctionComponent<IFormConsumerChildren> = ({ children }) => (
     <ErrorsContext.Consumer>
         {errors => (
             <ValuesContext.Consumer>
