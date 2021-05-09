@@ -1,13 +1,15 @@
-import { Session, SessionData } from "express-session";
+import { Session, SessionData } from 'express-session';
 
-export declare module "express-session" {
-    interface SessionData {
-        userId: string;
-    }
+export declare module 'express-session' {
+	interface SessionData {
+		userId: string;
+	}
 }
 
-namespace Express {
-    interface Request {
-        session: SessionData;
-    }
-}
+// namespace Express {
+//     interface Request {
+//         session: SessionData;
+//     }
+// }
+
+console.log('Express', Express);
