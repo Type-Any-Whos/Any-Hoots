@@ -1,4 +1,4 @@
-import React, { useContext, useState, FunctionComponent, FormEvent } from "react";
+import React, { useContext, useState, FunctionComponent } from "react";
 import { Redirect } from "react-router-dom";
 
 import { StateContext, ContextType } from "../../../StateProvider";
