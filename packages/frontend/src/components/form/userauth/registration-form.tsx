@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { FormControl, Grid, Input, Box, Typography } from "@material-ui/core";
 import { StateContext, ContextType } from "../../../StateProvider";
+import FormInput from "../FormInput";
 
 type FormPartProps = {
     customValue: string;
@@ -14,26 +15,22 @@ const RegistrationFormPart = ({ customValue }: FormPartProps) => {
     return (
         <>
            <FormControl fullWidth>
-                <Input
+                <FormInput
                   id="handle"
                   name="handle"
                   placeholder="Handle"
-                  value={handle}
-                  onChange={(evt) => setHandle(evt.target.value)}
                 />
             </FormControl>
             <FormControl fullWidth>
-                <Input
+                <FormInput
                   type="password"
                   name="password"
                   id="password"
                   placeholder="Password"
-                  value={password}
-                  onChange={(evt) => setPassword(evt.target.value)}
                 />
             </FormControl>
             <FormControl fullWidth>
-                <Input name="submit-btn" type="submit" value={customValue}></Input>
+                <FormInput name="submit-btn" type="submit" value={customValue}/>
             </FormControl>
         </>
     );
