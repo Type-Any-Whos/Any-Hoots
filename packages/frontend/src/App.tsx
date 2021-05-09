@@ -13,6 +13,7 @@ import FeedPage from "./feed/FeedPage";
 import NotFoundPage from "./layout/NotFoundPage";
 import StateProvider, { StateContext } from "./StateProvider";
 import { checkSession } from "./auth/authApi";
+import AuthPage from "./auth/AuthPage";
 
 export default function App() {
   return (
@@ -24,12 +25,13 @@ export default function App() {
       </AppBar>
       <Router>
         <Switch>
-          <Route path="/auth/login">
-            <LoginPage />
-          </Route>
-          <Route path="/auth/register">
-            <RegisterPage />
-          </Route>
+            {["/auth/login", "/auth/register"].map(path => (
+                <Route
+                    key={path}
+                    exact path={path}
+                    component={AuthPage}
+                />
+            ))}
           <Route>
             <Grid container>
               <LeftBar />
