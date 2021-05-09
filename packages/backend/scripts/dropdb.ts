@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import mongoose = require('mongoose');
 import { mongoConnectionString } from '../constants';
 /* Connect to the DB */
 mongoose.connect(mongoConnectionString, function () {
