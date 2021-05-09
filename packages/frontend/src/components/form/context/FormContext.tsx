@@ -3,7 +3,7 @@ import { StateContext, ContextType } from "../../../StateProvider";
 
 const ValuesContext = createContext({});
 const ErrorsContext = createContext({});
-const SetValueContext = createContext((name: string, value: {}) => {});
+const SetValueContext = createContext((name: string, value: string) => {});
 ValuesContext.displayName = "FormValues";
 ErrorsContext.displayName = "FormErrors";
 SetValueContext.displayName = "FormValueSetter";
@@ -21,9 +21,9 @@ const defaultFormStateValues = {
 
 type FormProps = {
     validator?: () => {};
-    onSubmit: ({errors: {}, values: {}}, evt: FormEvent ) => {};
-    // onSubmit: ({errors: {}, values: {[key: string]: any}}) => void;
+    onSubmit({errors: {}, values: {}}): void;
     defaultValues?: {};
+    children?: ReactNode;
 }
 
 const Form: FunctionComponent<FormProps> = ({
@@ -37,7 +37,7 @@ const Form: FunctionComponent<FormProps> = ({
     const [formErrors, setFormErrors] = useState(INITIAL_ERRORS_STATE);
     const { state, dispatch } = useContext<ContextType>(StateContext);
 
-    const _setValue = (name: string, value: {}) => {
+    const _setValue = (name: string, value: string) => {
         setFormValues(prevState => ({
             ...prevState,
             [name]: value
@@ -45,14 +45,13 @@ const Form: FunctionComponent<FormProps> = ({
     }
 
     const _onSubmit = (evt: FormEvent) => {
-        console.log("hi")
         evt.preventDefault();
         const values = formValues;
         const errors = formErrors;
         // TODO - form validation logic
         // const errors = _validate();
         // setFormErrors(errors);
-        onSubmit({errors, values}, evt);
+        onSubmit({errors, values});
     }
 
 
@@ -77,12 +76,21 @@ const Form: FunctionComponent<FormProps> = ({
 
 Form.displayName = "CustomForm";
 
+interface IErrors {
+    [key: string]: string | number;
+    [index: number]: string; // Can be a subset of string indexer
+}
+
+type IValues = {
+    [key: string]: string | number;
+    [index: number]: string; // Can be a subset of string indexer
+}
+
 type FormConsumerChildren = {
-    //! TODO - setValue needs to be properly defined
-    //! TODO - Add indexing signature to errors and values
     //! TODO - Refactor type declaration for maintainability
-    //? Investigate onSubmit type error on AuthForm.tsx, if aforementioned doesn't resolve
-    children({errors: {}, values: {}, setValue: any}): ReactElement; // or ReactElement?
+    children(
+        { errors: {}, values: {}, setValue: {} }: {errors: IErrors, values: IValues, setValue: (name: string, value: string) => void}
+    ): ReactElement; // or ReactElement?
 };
 
 export const FormConsumer: FunctionComponent<FormConsumerChildren> = ({ children }) => (
