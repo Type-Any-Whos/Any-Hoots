@@ -2,9 +2,9 @@ import { useContext } from "react";
 import { login, register } from "../auth/authApi";
 import { StateContext, ContextType } from "../StateProvider";
 
-const { dispatch } = useContext<ContextType>(StateContext);
 
 export async function handleLogin(handle: string, password: string) {
+    const { dispatch } = useContext<ContextType>(StateContext);
     try {
         const user = await login(handle, password);
         dispatch({
@@ -18,6 +18,7 @@ export async function handleLogin(handle: string, password: string) {
 }
 
 export async function handleRegistration(handle: string, password: string) {
+    const { dispatch } = useContext<ContextType>(StateContext);
     try {
         const user = await register(handle, password);
         dispatch({

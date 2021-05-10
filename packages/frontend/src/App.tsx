@@ -17,12 +17,12 @@ const AUTH_ROUTES = [
         path: "/auth/login",
         key: "APP_LOGIN",
         exact: true,
-        component: () => AuthPage,
+        component: () => AuthPage(),
     }, {
         path: "/auth/register",
         key: "APP_REGISTER",
         exact: true,
-        component: () => AuthPage,
+        component: () => AuthPage(),
     },
 ];
 
@@ -34,6 +34,8 @@ type AuthRoute = {
 }
 
 export default function App() {
+
+
   return (
     <StateProvider>
       <AppBar position="static" style={{ marginBottom: 24 }}>
