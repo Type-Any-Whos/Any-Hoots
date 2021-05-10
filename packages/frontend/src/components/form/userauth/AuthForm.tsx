@@ -10,17 +10,10 @@ import { handleAuthSubmit } from "../../../utils/formApi";
 
 
 const AuthForm: FunctionComponent = () => {
-    const { state } = useContext<ContextType>(StateContext);
-
     const [credentialError, setCredentialError] = useState({
         user: null,
         password: null,
     });
-
-
-    if (state.user) {
-        return <Redirect to="/" />;
-    }
 
     return (
         <Form onSubmit={handleAuthSubmit}>
