@@ -6,9 +6,8 @@ import {
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import {
-	SyntheticEvent,
+	FormEvent,
 	useEffect,
-	useRef,
 	useState,
 	useContext,
 } from 'react';
@@ -34,10 +33,10 @@ export default function FeedPage() {
 		setTweets(tweets);
 	}
 
-	async function submit(evt: SyntheticEvent) {
-		evt.preventDefault();
+	async function submit({ errors, values }: any) {
+        const { newTweet } = values
 
-		const value = tweetInputValue?.trim();
+		const value = newTweet?.trim();
 
 		if (!value) {
 			return;
