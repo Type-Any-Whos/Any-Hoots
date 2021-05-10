@@ -23,7 +23,6 @@ export default function FeedPage() {
 
 	async function submit({ errors, values }: any) {
 		const { newTweet } = values;
-		console.log('what is my value', values);
 		let value = newTweet?.trim();
 
 		if (newTweet.length > 180) {
@@ -65,7 +64,6 @@ export default function FeedPage() {
 						<Paper elevation={1}>
 							<Box padding={1}>@{tweet.user.handle}</Box>
 							<Box padding={1}>{tweet.text}</Box>
-							{/* {console.log('feedpage tweet object', tweet)} */}
 							<Box padding={1}>{tweet.timestamp.split('T')[0]}</Box>
 						</Paper>
 					</Box>
