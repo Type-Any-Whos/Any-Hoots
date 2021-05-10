@@ -23,7 +23,7 @@ export default function FeedPage() {
 
 	async function submit({ errors, values }: any) {
 		const { newTweet } = values;
-		let value = newTweet?.trim();
+		const value = newTweet?.trim();
 
 		if (newTweet.length > 180) {
 			alert('Tweet is longer than 180 characters');
