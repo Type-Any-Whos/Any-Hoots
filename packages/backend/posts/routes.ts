@@ -12,7 +12,7 @@ router.post('/', requireAuth, async (req, res, next) => {
 		return next(createError(400, 'You must provide text.'));
 	}
 
-	const timeobj = { timestamp: new Date(req.body.timestamp).toLocaleString() };
+	const timeobj = { timestamp: new Date(req.body.timestamp).toDateString() };
 	let { timestamp } = timeobj;
 	const Post = mongoose.model('Post');
 	const post = await Post.create({
