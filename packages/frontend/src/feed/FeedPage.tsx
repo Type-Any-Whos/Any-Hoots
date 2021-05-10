@@ -22,7 +22,6 @@ export default function FeedPage() {
 	const { state } = useContext<ContextType>(StateContext);
 	const { user } = state;
 	const [tweets, setTweets] = useState<Tweet[]>([]);
-	const [tweetInputValue, setTweetInputValue] = useState<String>('');
 
 	useEffect(() => {
 		getTweets();
@@ -43,7 +42,6 @@ export default function FeedPage() {
 		}
 
 		await submitTweet({ text: value });
-		setTweetInputValue('');
 		await getTweets();
 	}
 	const currentUser = user ? user.handle : '';
