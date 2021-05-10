@@ -42,8 +42,6 @@ export default function StateProvider(props: any) {
 		});
 	}, []);
 
-	// console.log("STATE", state);
-
 	return (
 		<StateContext.Provider value={{ state, dispatch }}>
 			{props.children}
