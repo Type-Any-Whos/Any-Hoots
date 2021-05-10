@@ -1,5 +1,5 @@
 import { Grid, Typography, FormControl } from "@material-ui/core";
-import { useContext } from "react";
+import { useContext, FormEvent } from "react";
 import { StateContext, ContextType } from "../StateProvider";
 import { Link, Redirect } from "react-router-dom";
 import Form, { FormInput } from "../components/form";
@@ -14,7 +14,7 @@ export default function AuthPage() {
         ? "Register"
         : "Login";
 
-    const { state } = useContext<ContextType>(StateContext);
+    const { state, dispatch } = useContext<ContextType>(StateContext);
 
     if (state.user) {
         return <Redirect to="/" />;
@@ -40,7 +40,7 @@ export default function AuthPage() {
                         {/* Empty grid for spacing */}
                     </Grid>
                     <Grid item xs={4}>
-                        <Form onSubmit={handleAuthSubmit}>
+                        <Form onSubmit={(evt) => handleAuthSubmit(evt, dispatch)}>
                             <FormControl fullWidth>
                                 <FormInput
                                     id="handle"

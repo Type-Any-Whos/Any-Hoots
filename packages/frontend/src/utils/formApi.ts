@@ -1,13 +1,15 @@
-import { useContext } from "react";
+import { Dispatch } from "react";
 import { login, register } from "../auth/authApi";
-import { StateContext, ContextType } from "../StateProvider";
 
 
-export async function handleLogin(handle: string, password: string) {
-    const { dispatch } = useContext<ContextType>(StateContext);
+export async function handleLogin(
+    handle: string,
+    password: string,
+    callback: Dispatch<Action>
+) {
     try {
         const user = await login(handle, password);
-        dispatch({
+        callback({
             type: "setUser",
             payload: user,
         });
@@ -17,11 +19,14 @@ export async function handleLogin(handle: string, password: string) {
     }
 }
 
-export async function handleRegistration(handle: string, password: string) {
-    const { dispatch } = useContext<ContextType>(StateContext);
+export async function handleRegistration(
+    handle: string,
+    password: string,
+    callback: Dispatch<Action>
+) {
     try {
         const user = await register(handle, password);
-        dispatch({
+        callback({
             type: "setUser",
             payload: user,
         });
@@ -31,16 +36,16 @@ export async function handleRegistration(handle: string, password: string) {
     }
 }
 
-export function handleAuthSubmit({ errors, values }: any) {
+export function handleAuthSubmit({ errors, values }: any, dispatch: Dispatch<Action>) {
     console.log("handleSubmit_Callback-vals", values);
 
     switch (window.location.pathname) {
         case "/auth/login":
-            handleLogin(values.handle, values.password);
+            handleLogin(values.handle, values.password, dispatch);
             break;
 
         case "/auth/register":
-            handleRegistration(values.handle, values.password);
+            handleRegistration(values.handle, values.password, dispatch);
             break;
         default:
             break;
