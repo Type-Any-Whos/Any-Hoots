@@ -1,6 +1,6 @@
 import Form from './Form';
-import Field from './Field';
+import FormInput from './FormInput';
 
-export { Field }
+export { FormInput };
 
 export default Form;
