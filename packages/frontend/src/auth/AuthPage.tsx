@@ -2,7 +2,6 @@ import { Grid, Typography, FormControl } from "@material-ui/core";
 import { useContext } from "react";
 import { StateContext, ContextType } from "../StateProvider";
 import { Link, Redirect } from "react-router-dom";
-import AuthForm from "../components/form/userauth/AuthForm";
 import Form, { FormInput } from "../components/form";
 import { handleAuthSubmit } from "../utils/formApi";
 
