@@ -1,27 +1,27 @@
 import {
-	Button,
 	FormControl,
 	Input,
-	InputLabel,
 	Paper,
 } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import React, {
-	SyntheticEvent,
+import {
+	FormEvent,
 	useEffect,
-	useRef,
 	useState,
 	useContext,
 } from 'react';
+
+import Form, { FormInput } from "../components/form";
+
 import { getFeed, submitTweet } from './feedApi';
 import { StateContext, ContextType } from '../StateProvider';
 
+
 export default function FeedPage() {
-	const { state, dispatch } = useContext<ContextType>(StateContext);
+	const { state } = useContext<ContextType>(StateContext);
 	const { user } = state;
 	const [tweets, setTweets] = useState<Tweet[]>([]);
-	const [tweetInputValue, setTweetInputValue] = useState<String>('');
 
 	useEffect(() => {
 		getTweets();
@@ -32,17 +32,16 @@ export default function FeedPage() {
 		setTweets(tweets);
 	}
 
-	async function submit(evt: SyntheticEvent) {
-		evt.preventDefault();
+	async function submit({ errors, values }: any) {
+        const { newTweet } = values
 
-		const value = tweetInputValue?.trim();
+		const value = newTweet?.trim();
 
 		if (!value) {
 			return;
 		}
 
 		await submitTweet({ text: value });
-		setTweetInputValue('');
 		await getTweets();
 	}
 	const currentUser = user ? user.handle : '';
@@ -52,19 +51,18 @@ export default function FeedPage() {
 			<Paper elevation={2}>
 				{/* IF THERE IS NO USER, DO NOT DISPLAY FORM TO TWEET */}
 				{currentUser && (
-					<form onSubmit={(evt) => submit(evt)}>
+					<Form onSubmit={submit}>
 						<FormControl fullWidth>
-							<Input
+							<FormInput
 								id='tweet-input'
+                                name="newTweet"
 								placeholder="What's happening?"
-								value={tweetInputValue}
-								onChange={(evt) => setTweetInputValue(evt.target.value)}
 							/>
 						</FormControl>
 						<FormControl fullWidth>
-							<Input type='submit' value='Tweet'></Input>
+							<FormInput name='submit-btn' type='submit' value='Tweet' />
 						</FormControl>
-					</form>
+					</Form>
 				)}
 			</Paper>
 			<Button>Filter</Button>

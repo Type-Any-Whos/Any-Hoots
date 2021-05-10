@@ -18,3 +18,10 @@ interface Action {
 	type: 'setUser' | 'unsetUser';
 	payload: any;
 }
+
+interface IAuthRoute {
+	path: string;
+	key: string;
+	exact?: boolean | null | undefined;
+	component: any; //! TEMP
+}

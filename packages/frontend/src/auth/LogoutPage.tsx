@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Redirect } from "react-router";
 import { StateContext } from "../StateProvider";
 import { logout } from "./authApi";

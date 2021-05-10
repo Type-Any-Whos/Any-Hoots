@@ -1,4 +1,4 @@
-import { get, post } from '../util';
+import { get, post } from '../utils/fetchApi';
 
 export function getFeed(): Promise<Tweet[]> {
 	return get('api/posts');
@@ -7,6 +7,5 @@ export function getFeed(): Promise<Tweet[]> {
 export function submitTweet(tweet: { text: string }): Promise<void> {
 	return post('api/posts', {
 		text: tweet.text,
-		timestamp: Date.now(),
 	});
 }
