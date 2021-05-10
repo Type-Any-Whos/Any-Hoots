@@ -12,8 +12,12 @@ import {
 	useState,
 	useContext,
 } from 'react';
+
+import Form, { FormInput } from "../components/form";
+
 import { getFeed, submitTweet } from './feedApi';
 import { StateContext, ContextType } from '../StateProvider';
+
 
 export default function FeedPage() {
 	const { state } = useContext<ContextType>(StateContext);
