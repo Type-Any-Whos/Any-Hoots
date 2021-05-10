@@ -2,15 +2,14 @@ import React, { useContext, useState, FunctionComponent } from "react";
 import { Redirect } from "react-router-dom";
 
 import { StateContext, ContextType } from "../../../StateProvider";
-import Form from "../context/FormContext";
+import Form from "../../form";
 import LoginFormPart from "./login-form";
 import RegistrationFormPart from "./registration-form";
 import { login, register } from "../../../auth/authApi";
 
 type IFormObj = {
     values: {
-        handle: string;
-        password: string;
+        [key: string]: string | number;
     };
     errors: {};
 }
@@ -50,7 +49,7 @@ const AuthForm: FunctionComponent = () => {
     }
 
 
-    function handleSubmit({errors, values}: IFormObj) {
+    function handleSubmit({errors, values}: any) {
         console.log("handleSubmit_Callback-vals", values);
 
         switch (window.location.pathname) {
