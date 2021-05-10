@@ -7,13 +7,16 @@ const router = express.Router();
 // create
 router.post('/', requireAuth, async (req, res, next) => {
 	let { text } = req.body;
-
+	console.log('what is my req.body', req.body);
 	if (!text) {
 		return next(createError(400, 'You must provide text.'));
 	}
 
-	const timeobj = { timestamp: new Date(req.body.timestamp).toDateString() };
+	const timeobj = {
+		timestamp: new Date(Date.now()).toISOString(),
+	};
 	let { timestamp } = timeobj;
+
 	const Post = mongoose.model('Post');
 	const post = await Post.create({
 		text,
@@ -21,6 +24,7 @@ router.post('/', requireAuth, async (req, res, next) => {
 		// @ts-ignore
 		user: req.session.userId,
 	});
+	console.log('what is my post', post);
 
 	return res.json(post);
 });

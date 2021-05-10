@@ -1,28 +1,17 @@
-import {
-	FormControl,
-	Input,
-	Paper,
-} from '@material-ui/core';
+import { FormControl, Input, Paper, Button } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import {
-	FormEvent,
-	useEffect,
-	useState,
-	useContext,
-} from 'react';
+import { FormEvent, useEffect, useState, useContext } from 'react';
 
-import Form, { FormInput } from "../components/form";
+import Form, { FormInput } from '../components/form';
 
 import { getFeed, submitTweet } from './feedApi';
 import { StateContext, ContextType } from '../StateProvider';
-
 
 export default function FeedPage() {
 	const { state } = useContext<ContextType>(StateContext);
 	const { user } = state;
 	const [tweets, setTweets] = useState<Tweet[]>([]);
-
 	useEffect(() => {
 		getTweets();
 	}, []);
@@ -33,10 +22,14 @@ export default function FeedPage() {
 	}
 
 	async function submit({ errors, values }: any) {
-        const { newTweet } = values
+		const { newTweet } = values;
+		console.log('what is my value', values);
+		let value = newTweet?.trim();
 
-		const value = newTweet?.trim();
-
+		if (newTweet.length > 180) {
+			alert('Tweet is longer than 180 characters');
+			return;
+		}
 		if (!value) {
 			return;
 		}
@@ -45,7 +38,7 @@ export default function FeedPage() {
 		await getTweets();
 	}
 	const currentUser = user ? user.handle : '';
-	console.log('what is my user', currentUser);
+
 	return (
 		<Grid item xs={10}>
 			<Paper elevation={2}>
@@ -55,8 +48,8 @@ export default function FeedPage() {
 						<FormControl fullWidth>
 							<FormInput
 								id='tweet-input'
-                                name="newTweet"
-								placeholder="What's happening?"
+								name='newTweet'
+								placeholder="What's happening? (180 characters)"
 							/>
 						</FormControl>
 						<FormControl fullWidth>
@@ -65,16 +58,19 @@ export default function FeedPage() {
 					</Form>
 				)}
 			</Paper>
-			<Button>Filter</Button>
-			{tweets.map((tweet) => (
-				<Box key={tweet._id} padding={1}>
-					<Paper elevation={1}>
-						<Box padding={1}>@{tweet.user.handle}</Box>
-						<Box padding={1}>{tweet.text}</Box>
-						<Box padding={1}>{tweet.timestamp}</Box>
-					</Paper>
-				</Box>
-			))}
+
+			{tweets
+				.map((tweet) => (
+					<Box key={tweet._id} padding={1}>
+						<Paper elevation={1}>
+							<Box padding={1}>@{tweet.user.handle}</Box>
+							<Box padding={1}>{tweet.text}</Box>
+							{/* {console.log('feedpage tweet object', tweet)} */}
+							<Box padding={1}>{tweet.timestamp.split('T')[0]}</Box>
+						</Paper>
+					</Box>
+				))
+				.reverse()}
 		</Grid>
 	);
 }
