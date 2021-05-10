@@ -5,11 +5,3 @@ export declare module 'express-session' {
 		userId: string;
 	}
 }
-
-// namespace Express {
-//     interface Request {
-//         session: SessionData;
-//     }
-// }
-
-console.log('Express', Express);
