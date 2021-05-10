@@ -1,5 +1,3 @@
-import { FunctionComponent, ReactNode } from "react";
-
 interface Tweet {
     _id: string;
     user: User;
