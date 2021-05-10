@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
+import { SyntheticEvent, useEffect, useRef, useState } from "react";
 import { getFeed, submitTweet } from "./feedApi";
 
 export default function FeedPage() {
