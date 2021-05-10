@@ -54,19 +54,18 @@ export default function FeedPage() {
 			<Paper elevation={2}>
 				{/* IF THERE IS NO USER, DO NOT DISPLAY FORM TO TWEET */}
 				{currentUser && (
-					<form onSubmit={(evt) => submit(evt)}>
+					<Form onSubmit={submit}>
 						<FormControl fullWidth>
-							<Input
+							<FormInput
 								id='tweet-input'
+                                name="newTweet"
 								placeholder="What's happening?"
-								value={tweetInputValue}
-								onChange={(evt) => setTweetInputValue(evt.target.value)}
 							/>
 						</FormControl>
 						<FormControl fullWidth>
-							<Input type='submit' value='Tweet'></Input>
+							<FormInput name='submit-btn' type='submit' value='Tweet' />
 						</FormControl>
-					</form>
+					</Form>
 				)}
 			</Paper>
 			{tweets.map((tweet) => (
