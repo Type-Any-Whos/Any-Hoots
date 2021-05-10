@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 import { Input } from "@material-ui/core";
-import { useFormContext } from "./context/FormContext";
+import { useFormContext } from "./Form";
 
 type FormInputProps = {
     name: string;
@@ -8,12 +8,17 @@ type FormInputProps = {
     id?: string;
     placeholder?: string;
     value?: string;
-}
+};
 
 
-const FormInput: FunctionComponent<FormInputProps> = ({id, name, placeholder, type, value}) => {
+const FormInput: FunctionComponent<FormInputProps> = ({
+    id,
+    name,
+    placeholder,
+    type,
+    value,
+}) => {
     const {values, errors, setValue} = useFormContext();
-
     return (
         <Input
             id={id}
