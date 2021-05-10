@@ -6,31 +6,29 @@ const router = express.Router();
 
 // create
 router.post("/", requireAuth, async (req, res, next) => {
-  const { text } = req.body;
+    const { text } = req.body;
 
-  if (!text) {
-    return next(createError(400, "You must provide text."));
-  }
+    if (!text) {
+        return next(createError(400, "You must provide text."));
+    }
 
-  const Post = mongoose.model("Post");
-  const post = await Post.create({
-    text,
-    // @ts-ignore
-    user: req.session.userId,
-  });
+    const Post = mongoose.model("Post");
+    const post = await Post.create({
+        text,
+        user: req.session.userId,
+    });
 
-  return res.json(post);
+    return res.json(post);
 });
 
 // list
 router.get("/", async (req, res, next) => {
-  const Post = mongoose.model("Post");
-  // @ts-ignore
-  const posts = await Post.find().populate({
-    path: "user",
-    model: "User",
-  });
-  return res.json(posts);
+    const Post = mongoose.model("Post");
+    const posts = await Post.find().populate({
+        path: "user",
+        model: "User",
+    });
+    return res.json(posts);
 });
 
 module.exports = router;

@@ -1,5 +1,5 @@
 import Grid from "@material-ui/core/Grid";
-import React, { FunctionComponent, useContext } from "react";
+import { FunctionComponent, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Box } from "@material-ui/core";
 import { Link } from "react-router-dom";

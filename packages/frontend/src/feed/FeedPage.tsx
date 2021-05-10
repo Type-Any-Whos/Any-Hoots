@@ -1,13 +1,11 @@
 import {
-	Button,
 	FormControl,
 	Input,
-	InputLabel,
 	Paper,
 } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import React, {
+import {
 	SyntheticEvent,
 	useEffect,
 	useRef,
@@ -18,7 +16,7 @@ import { getFeed, submitTweet } from './feedApi';
 import { StateContext, ContextType } from '../StateProvider';
 
 export default function FeedPage() {
-	const { state, dispatch } = useContext<ContextType>(StateContext);
+	const { state } = useContext<ContextType>(StateContext);
 	const { user } = state;
 	const [tweets, setTweets] = useState<Tweet[]>([]);
 	const [tweetInputValue, setTweetInputValue] = useState<String>('');
