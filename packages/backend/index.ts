@@ -11,11 +11,8 @@ const { mongoConnectionString } = require('./constants');
 
 const app = express();
 app.use(express.static('public'));
-const db =
-	mongoConnectionString ||
-	'mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser:true})';
-// connect to the DB
-mongoose.connect(db, {
+
+mongoose.connect(process.env.MONGODB_URI, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 	useFindAndModify: false,
