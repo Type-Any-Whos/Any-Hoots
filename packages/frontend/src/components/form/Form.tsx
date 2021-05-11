@@ -41,6 +41,9 @@ const Form: FunctionComponent<IFormProps> = ({
         // const errors = _validate();
         // setFormErrors(errors);
         onSubmit({errors, values});
+
+        //! TODO - only when if successful, clear input
+        setFormValues(defaultFormStateValues.defaultValues);
     }
 
 
