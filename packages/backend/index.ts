@@ -13,8 +13,9 @@ const app = express();
 app.use(express.static('public'));
 
 const port = process.env.PORT || 3000;
+const db = process.env.MONGODB_URI || mongoConnectionString;
 
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect(db, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 	useFindAndModify: false,
