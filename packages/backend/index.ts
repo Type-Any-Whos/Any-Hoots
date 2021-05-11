@@ -12,6 +12,8 @@ const { mongoConnectionString } = require('./constants');
 const app = express();
 app.use(express.static('public'));
 
+const port = 3000 || process.env.PORT;
+
 mongoose.connect(process.env.MONGODB_URI, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
@@ -48,7 +50,7 @@ app.use(
 app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);
 
-const server = app.listen(3000, () => {
+const server = app.listen(port, () => {
 	console.log('Now listening on port:', server.address().port);
 });
 
