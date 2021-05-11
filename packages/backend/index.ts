@@ -12,7 +12,7 @@ const { mongoConnectionString } = require('./constants');
 const app = express();
 app.use(express.static('public'));
 
-const port = 3000 || process.env.PORT;
+const port = process.env.PORT || 3000;
 
 mongoose.connect(process.env.MONGODB_URI, {
 	useNewUrlParser: true,
