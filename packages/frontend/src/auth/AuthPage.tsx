@@ -5,6 +5,8 @@ import { Link, Redirect } from "react-router-dom";
 import Form, { FormInput } from "../components/form";
 import { handleAuthSubmit } from "../utils/formApi";
 
+import image from '../../../../undraw_Social_networking_re_i1ex-removebg-preview.png';
+
 export default function AuthPage() {
     const AuthFormFooter = window.location.pathname === "/auth/register"
         ? <>Already have an account? <Link to="/auth/login">Sign in</Link>.</>
@@ -26,7 +28,8 @@ export default function AuthPage() {
                 <Grid container>
                     <Grid item xs={2}></Grid>
                     <Grid item xs={10}>
-                        <Typography variant="h4">Welcome to Twitterbean!</Typography>
+                        <Typography variant="h4">Welcome to AnyHoots!</Typography>
+                        <img src={image} />
                         <Typography variant="h6">Make new friends!</Typography>
                         <Typography variant="h6">Talk about things!</Typography>
                         <Typography variant="h6">Be part of a community!</Typography>

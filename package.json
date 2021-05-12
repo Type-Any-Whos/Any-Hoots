@@ -19,5 +19,8 @@
 	},
 	"devDependencies": {
 		"concurrently": "^6.0.2"
+	},
+	"dependencies": {
+		"darkmode-js": "^1.5.7"
 	}
 }

@@ -1,6 +1,9 @@
 import { BrowserRouter as Router, Switch, Route, RouteComponentProps } from "react-router-dom";
 import { AppBar, Grid, Typography } from "@material-ui/core";
 
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
 import MainBar from "./layout/MainBar";
 import LeftBar from "./layout/LeftBar";
 import RightBar from "./layout/RightBar";
@@ -35,14 +38,22 @@ type AuthRoute = {
 
 export default function App() {
 
+  const theme = createMuiTheme({
+    palette: {
+      type: 'dark',
+    },
+  });
 
   return (
     <StateProvider>
+      <ThemeProvider theme={theme}>
+      <CssBaseline/>
       <AppBar position="static" style={{ marginBottom: 24 }}>
         <Typography variant="h6" style={{ padding: 12 }}>
-          Twitterbean
+          AnyHoots
         </Typography>
       </AppBar>
+
       <Router>
         <Switch>
             {AUTH_ROUTES.map((routeObj: AuthRoute) => (
@@ -72,6 +83,7 @@ export default function App() {
           </Route>
         </Switch>
       </Router>
+      </ThemeProvider>
     </StateProvider>
   );
 }
