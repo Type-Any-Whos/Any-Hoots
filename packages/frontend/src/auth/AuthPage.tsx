@@ -5,7 +5,7 @@ import { Link, Redirect } from 'react-router-dom';
 import Form, { FormInput } from '../components/form';
 import { handleAuthSubmit } from '../utils/formApi';
 
-import image from '../images/undraw_Social_networking_re_i1ex-removebg-preview.png';
+import image from '../images/social.svg';
 
 export default function AuthPage() {
 	const AuthFormFooter =
@@ -35,7 +35,7 @@ export default function AuthPage() {
 					<Grid item xs={2}></Grid>
 					<Grid item xs={10}>
 						<Typography variant='h4'>Welcome to AnyHoots!</Typography>
-						<img src={image} />
+						<img src={image} style={{ height: '20em' }} />
 						<Typography variant='h6'>Make new friends!</Typography>
 						<Typography variant='h6'>Talk about things!</Typography>
 						<Typography variant='h6'>Be part of a community!</Typography>

@@ -5,7 +5,7 @@ import { Button, Box } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { StateContext } from '../StateProvider';
 
-import image from '../images/undraw_Mention_re_k5xc-removebg-preview.png';
+import image from '../images/mention.svg';
 const useStyles = makeStyles({
 	navItemLink: {
 		textDecoration: 'none',
@@ -57,7 +57,10 @@ export default function LeftBar() {
 					</Grid>
 				</Grid>
 			</Grid>
-			<img src={image} style={{ position: 'fixed' }} />
+			<img
+				src={image}
+				style={{ position: 'fixed', height: '20em', padding: '1em' }}
+			/>
 		</Grid>
 	);
 }
