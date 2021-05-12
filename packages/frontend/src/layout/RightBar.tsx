@@ -1,11 +1,11 @@
 import Grid from '@material-ui/core/Grid';
 
 // import image from '../../../../';
-import image from '../images/undraw_site_content_ihgn-removebg-preview.png';
+import image from '../images/site.svg';
 export default function RightBar() {
 	return (
 		<Grid item xs={4}>
-			<img src={image} style={{ position: 'fixed' }} />
+			<img src={image} style={{ position: 'fixed', height: '20em' }} />
 			<Grid container>
 				<Grid item xs={6}></Grid>
 				<Grid item xs={12} /> {/* Leave half the page */}
