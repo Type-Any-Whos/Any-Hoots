@@ -2,12 +2,11 @@ import { FormControl, Input, Paper, Button } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import { FormEvent, useEffect, useState, useContext } from 'react';
-
 import Form, { FormInput } from '../components/form';
-
 import { getFeed, submitTweet } from './feedApi';
 import { StateContext, ContextType } from '../StateProvider';
 
+import AlertMessage from '../AlertMessage';
 export default function FeedPage() {
 	const { state } = useContext<ContextType>(StateContext);
 	const { user } = state;
@@ -21,16 +20,20 @@ export default function FeedPage() {
 		setTweets(tweets);
 	}
 
+	const [status, setStatus] = useState<any>();
 	async function submit({ errors, values }: any) {
 		const { newTweet } = values;
-		// const value = newTweet?.trim();
 		const value = newTweet ? newTweet.trim() : undefined;
 
-		if (newTweet.length > 180) {
-			alert('Tweet is longer than 180 characters');
+		if (newTweet === undefined) {
+			setStatus({ msg: 'Hoot cannot be empty!', key: Math.random() });
 			return;
 		}
-		if (!value) {
+		if (newTweet.length > 180) {
+			setStatus({
+				msg: 'Hoot cannot longer than 180 charcters!',
+				key: Math.random(),
+			});
 			return;
 		}
 
@@ -52,13 +55,17 @@ export default function FeedPage() {
 								placeholder="What's happening? (180 characters)"
 							/>
 						</FormControl>
+
 						<FormControl fullWidth>
 							<FormInput name='submit-btn' type='submit' value='Tweet' />
 						</FormControl>
+						{/* IF THE STATUS IS TRUE, DISPLAY THE STATUS IE: THE CONDITIONALS FOR HOOT SUBMISSIONS */}
+						{status ? (
+							<AlertMessage key={status.key} message={status.msg} />
+						) : null}
 					</Form>
 				)}
 			</Paper>
-
 			{tweets
 				.map((tweet) => (
 					<Box key={tweet._id} padding={1}>
